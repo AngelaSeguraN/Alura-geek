@@ -1,3 +1,7 @@
+function limpiarFormulario() {
+    document.getElementById('formulario-producto').reset();
+}
+
 // Funciones de simulación de API y LocalStorage
 function inicializarProductos() {
     const productosGuardados = JSON.parse(localStorage.getItem('productos')) || [];

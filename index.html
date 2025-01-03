@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Productos en Vista Vertical</h1>
+        <h1>Alura Geek</h1>
     </header>
     <div class="contenedor">
         <section>
@@ -27,13 +27,17 @@
                 <label for="imagen">Imagen:</label>
                 <input type="file" id="imagen" accept="image/*" required>
                 
-                <button class="enviar" onclick="agregarProducto()">Agregar</button>
-                <button class="limpiar" type="reset">Limpiar</button>
+                <div class="botones">
+                    <button class="enviar" onclick="agregarProducto()">Agregar</button>
+                    <button class="limpiar" type="button" onclick="limpiarFormulario()">Limpiar</button>
+
+                </div>
             </div>
+            
         </section>
     </div>
     <footer>
-        <p>&copy; 2025 Alura Geek</p>
+        <p>&copy; 2025 Alura Geek  --  Angela Segura</p>
     </footer>
     <script src="script.js"></script>
 </body>
