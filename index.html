@@ -3,222 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar y Guardar Productos</title>
-    <style>
-        /* Los estilos permanecen igual */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            background: #4CAF50;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        .contenedor {
-            display: flex;
-            justify-content: space-around;
-            padding: 1rem;
-            gap: 1rem;
-        }
-        section {
-            flex: 1;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #f9f9f9;
-        }
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 1rem;
-        }
-        .formulario {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .formulario label {
-            font-weight: bold;
-        }
-        .formulario input {
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .formulario button {
-            padding: 0.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .formulario button.enviar {
-            background: #4CAF50;
-            color: white;
-        }
-        .formulario button.limpiar {
-            background: #f44336;
-            color: white;
-        }
-        .productos {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .producto {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #fff;
-        }
-        .producto img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .producto-info {
-            flex: 1;
-            margin-left: 1rem;
-        }
-        .producto-info h3,
-        .producto-info p {
-            margin: 0;
-        }
-        .producto button {
-            background: #f44336;
-            color: white;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Productos en Vista Vertical</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Secciones Horizontales</h1>
+        <h1>Productos en Vista Vertical</h1>
     </header>
     <div class="contenedor">
         <section>
-            <h2>Productos Subidos</h2>
+            <h2>Productos</h2>
             <div class="productos" id="productos"></div>
         </section>
         <section>
             <h2>Agregar Producto</h2>
             <div class="formulario">
-                <label for="nombre">Nombre del Producto:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingresa el nombre" required>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="Ingresa el nombre" required>
                 
                 <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" placeholder="Ingresa el precio" required>
+                <input type="number" id="precio" placeholder="Ingresa el precio" required>
                 
-                <label for="imagen">Imagen del Producto:</label>
-                <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                <label for="imagen">Imagen:</label>
+                <input type="file" id="imagen" accept="image/*" required>
                 
-                <div>
-                    <button type="button" class="enviar" onclick="agregarProducto()">Enviar</button>
-                    <button type="reset" class="limpiar">Limpiar</button>
-                </div>
+                <button class="enviar" onclick="agregarProducto()">Agregar</button>
+                <button class="limpiar" type="reset">Limpiar</button>
             </div>
         </section>
     </div>
     <footer>
-        <p>&copy; 2025 Mi Página. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Productos en Vista Vertical</p>
     </footer>
-    <script>
-        // Función para cargar productos desde LocalStorage
-        function cargarProductos() {
-            const productos = JSON.parse(localStorage.getItem('productos')) || [];
-            productos.forEach(producto => {
-                agregarProductoUI(producto.nombre, producto.precio, producto.imagen);
-            });
-        }
-
-        // Función para guardar un producto en LocalStorage
-        function guardarProducto(producto) {
-            const productos = JSON.parse(localStorage.getItem('productos')) || [];
-            productos.push(producto);
-            localStorage.setItem('productos', JSON.stringify(productos));
-        }
-
-        // Función para agregar un producto a la interfaz de usuario
-        function agregarProductoUI(nombre, precio, imagen) {
-            const productosContainer = document.getElementById('productos');
-
-            const producto = document.createElement('div');
-            producto.classList.add('producto');
-
-            const img = document.createElement('img');
-            img.src = imagen;
-            img.alt = nombre;
-
-            const info = document.createElement('div');
-            info.classList.add('producto-info');
-            const titulo = document.createElement('h3');
-            titulo.textContent = nombre;
-            const precioTexto = document.createElement('p');
-            precioTexto.textContent = `Precio: $${precio}`;
-
-            info.appendChild(titulo);
-            info.appendChild(precioTexto);
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.onclick = function() {
-                producto.remove();
-                eliminarProducto(nombre);
-            };
-
-            producto.appendChild(img);
-            producto.appendChild(info);
-            producto.appendChild(botonEliminar);
-
-            productosContainer.appendChild(producto);
-        }
-
-        // Función para eliminar un producto de LocalStorage
-        function eliminarProducto(nombre) {
-            let productos = JSON.parse(localStorage.getItem('productos')) || [];
-            productos = productos.filter(producto => producto.nombre !== nombre);
-            localStorage.setItem('productos', JSON.stringify(productos));
-        }
-
-        // Función para agregar un producto
-        function agregarProducto() {
-            const nombre = document.getElementById('nombre').value;
-            const precio = document.getElementById('precio').value;
-            const imagenInput = document.getElementById('imagen');
-
-            if (nombre && precio && imagenInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imagen = e.target.result;
-
-                    const producto = { nombre, precio, imagen };
-                    agregarProductoUI(nombre, precio, imagen);
-                    guardarProducto(producto);
-                };
-                reader.readAsDataURL(imagenInput.files[0]);
-
-                document.getElementById('nombre').value = '';
-                document.getElementById('precio').value = '';
-                document.getElementById('imagen').value = '';
-            } else {
-                alert('Por favor, completa todos los campos.');
-            }
-        }
-
-        // Cargar productos al cargar la página
-        window.onload = cargarProductos;
-    </script>
+    <script src="./script.js"></script>
 </body>
 </html>
