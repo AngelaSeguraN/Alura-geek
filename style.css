@@ -6,11 +6,30 @@ body {
     line-height: 1.6;
 }
 header {
-    background: #4CAF50;
+    background: #7c786c;
     color: white;
-    padding: 1rem 0;
+    padding: 0.3rem 0;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8rem;
+}
+
+header .logo {
+    width: 100px;
+    height: 50px;
+    
+    
+}
+
 .contenedor {
     display: flex;
     justify-content: space-between;
